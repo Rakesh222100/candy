@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    /* Light blue background */
+    color: #333;
+    text-align: center;
+}
+
+header {
+    background-color: #ff69b4;
+    /* Pink color */
+    color: white;
+    padding: 20px;
+}
+
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.image-item {
+    margin: 10px;
+}
+
+.image-item img {
+    width: 100%;
+    /* Adjust as needed */
+    border: 5px solid #ff69b4;
+    /* Pink border */
+}

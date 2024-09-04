@@ -1,0 +1,53 @@
+services:
+  candy-store-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: candy-store-app
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins-server
+    user: root
+    volumes:
+      - jenkins_home:/var/jenkins_home   # Volume mount
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    environment:
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
+    networks:
+      - app-network
+
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab-server
+    hostname: gitlab.local
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://localhost:8929'
+    ports:
+      - "8929:8929"   # Web interface
+      - "2224:22"     # SSH
+    volumes:
+      - gitlab_config:/etc/gitlab
+      - gitlab_logs:/var/log/gitlab
+      - gitlab_data:/var/opt/gitlab
+    networks:
+      - app-network
+
+  
+volumes:
+  jenkins_home: {}    # Explicitly define the volume
+  gitlab_config: {}
+  gitlab_logs: {}
+  gitlab_data: {}
+  jfrog_data: {}
+
+networks:
+  app-network: {}    # Explicitly define the network

@@ -13,7 +13,7 @@ services:
 
   jenkins:
     image: jenkins/jenkins:latest
-    container_name: jenkins-server
+    container_name: jenkins-server1
     user: root
     volumes:
       - ./jenkins_home:/var/jenkins_home   # Volume mount

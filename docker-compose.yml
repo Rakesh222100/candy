@@ -20,7 +20,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - "8081:8080"
-      - "50000:50000"
+      - "50001:50000"
     networks:
       - app-network
 
